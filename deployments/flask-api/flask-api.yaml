@@ -1,0 +1,27 @@
+--- 
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: ghg-analysis-api 
+  labels: 
+    app: ghg-client-api
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: ghg-client-api 
+  template: 
+    metadata: 
+      labels: 
+        app: ghg-client-api 
+    spec: 
+      containers: 
+        - name: ghg-analysis-api
+          imagePullPolicy: Always 
+          image: <...> 
+          env: 
+          - name: FLASK_APP
+            value: "flask_api.py" 
+          ports: 
+          - name: http
+            containerPort: 5000
