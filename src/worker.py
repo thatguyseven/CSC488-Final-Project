@@ -25,6 +25,7 @@ def plot_industries(entries, job_id):
     plt.yticks(fontsize=12)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
+    
     plot_path = os.path.join(PLOT_DIR, f"{job_id}_industry_plot.png")
     plt.savefig(plot_path)
     plt.close()
@@ -45,6 +46,7 @@ def plot_gases(entries, job_id):
     plt.yticks(fontsize=12)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
+    
     plot_path = os.path.join(PLOT_DIR, f"{job_id}_gas_plot.png")
     plt.savefig(plot_path)
     plt.close()
