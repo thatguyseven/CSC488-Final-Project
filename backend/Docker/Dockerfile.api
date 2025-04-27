@@ -1,0 +1,12 @@
+# docker/Dockerfile.api
+
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src/flask_api.py .
+
+CMD ["python", "flask_api.py"]
