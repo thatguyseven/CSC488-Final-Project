@@ -1,0 +1,31 @@
+--- 
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: ghg-api-data
+  labels: 
+    app: ghg-api-data
+    username: aan1
+    env: test
+spec: 
+  replicas: 1 
+  selector: 
+    matchLabels: 
+      app: ghg-api-data
+  template: 
+    metadata: 
+      labels: 
+        app: ghg-api-data
+        username: aan1
+        env: test
+    spec: 
+      containers: 
+        - name: ghg-api-data
+          image: redis:6
+          volumeMounts: 
+            - name: ghg-api-data
+              mountPath: "/data" 
+      volumes: 
+        - name: ghg-api-data
+          persistentVolumeClaim: 
+            claimName: ghg-api-data-pvc

@@ -1,0 +1,17 @@
+--- 
+apiVersion: v1 
+kind: PersistentVolumeClaim 
+metadata: 
+  name: ghg-api-data-pvc
+  labels: 
+    app: ghg-api-data
+    username: aan1
+    env: test
+spec: 
+  accessModes: 
+    - ReadWriteOnce 
+  # No nfs storage available. Using native standard storage class.
+  storageClassName: standard
+  resources: 
+    requests: 
+      storage: 1Gi 
