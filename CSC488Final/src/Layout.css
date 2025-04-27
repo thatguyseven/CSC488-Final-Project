@@ -1,0 +1,43 @@
+/* Layout.css */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 16px;
+    z-index: 50;
+  }
+  
+  .dropdown-toggle {
+    background-color: #3b82f6;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 48px; /* space below the button */
+    left: 0;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 160px;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .dropdown-menu li {
+    padding: 10px;
+    transition: background 0.2s;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .main-content {
+    padding-top: 80px; /* to prevent content from being hidden under fixed nav */
+  }
+  
