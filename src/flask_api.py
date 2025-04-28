@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import redis
 import json
 import uuid
 
 app = Flask(__name__)
+CORS(app)
 
 # Connect to Redis
 r = redis.Redis(host='localhost', port=6379, decode_responses=True)
@@ -28,7 +30,6 @@ def create_aggregate():
     r.hset(AGGREGATE_KEY, code, json.dumps(data))
     return jsonify({"message": f"Aggregate entry for code {code} created."}), 201
 
-
 @app.route('/create-gas', methods=['POST'])
 def create_gas():
     data = request.get_json()
@@ -39,6 +40,22 @@ def create_gas():
 
     r.hset(GAS_KEY, gas_name, json.dumps(data))
     return jsonify({"message": f"Gas entry for {gas_name} created."}), 201
+
+@app.route('/get-aggregate', methods=['GET'])
+def get_aggregate():
+    # Fetch all aggregate emissions data from Redis
+    aggregate_data = r.hgetall(AGGREGATE_KEY)
+    return jsonify(aggregate_data)
+
+
+@app.route('/get-gas', methods=['GET'])
+def get_gas():
+    # Fetch all gas emissions data from Redis
+    gas_data = r.hgetall(GAS_KEY)
+    return jsonify(gas_data)
+
+
+
 
 # ----------------------
 # Graph Endpoints

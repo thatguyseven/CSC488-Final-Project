@@ -31,7 +31,7 @@ const Layout = () => {
         {isOpen && (
           <ul id="dropdown-menu" className="dropdown-menu">
             <li><Link to="/Home" onClick={() => setIsOpen(false)}>Home</Link></li>
-            <li><Link to="/Create" onClick={() => setIsOpen(false)}>Create Report</Link></li>
+            <li><Link to="/Create" onClick={() => setIsOpen(false)}>Create Data Point</Link></li>
             <li><Link to="/Delete" onClick={() => setIsOpen(false)}>Delete a Record</Link></li>
             <li><Link to="/Update" onClick={() => setIsOpen(false)}>Update a Record</Link></li>
             <li><Link to="/Read" onClick={() => setIsOpen(false)}>All Records</Link></li>
