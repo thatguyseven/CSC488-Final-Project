@@ -52,10 +52,32 @@ def get_aggregate():
 def get_gas():
     # Fetch all gas emissions data from Redis
     gas_data = r.hgetall(GAS_KEY)
-    return jsonify(gas_data)
+    
+    # Check if the data is being retrieved correctly
+    if not gas_data:
+        return jsonify({"error": "No gas data found."}), 404  # Handle case where no data exists
 
+    return jsonify(gas_data)  # Return the fetched gas data
 
+@app.route('/delete-aggregate/<naics_code>', methods=['DELETE'])
+def delete_aggregate(naics_code):
+    if r.hexists(AGGREGATE_KEY, naics_code):
+        r.hdel(AGGREGATE_KEY, naics_code)
+        return jsonify({"message": f"Aggregate record for {naics_code} deleted."}), 200
+    return jsonify({"error": "Aggregate record not found."}), 404
 
+@app.route('/delete-gas/<naics_code>', methods=['DELETE'])
+def delete_gas(naics_code):
+    deleted = False
+    all_gas = r.hgetall(GAS_KEY)
+    for key, value in all_gas.items():
+        record = json.loads(value)
+        if str(record.get("2017 NAICS Code")) == naics_code:
+            r.hdel(GAS_KEY, key)
+            deleted = True
+    if deleted:
+        return jsonify({"message": f"Gas records for NAICS code {naics_code} deleted."}), 200
+    return jsonify({"error": "No gas records found for NAICS code."}), 404
 
 # ----------------------
 # Graph Endpoints
