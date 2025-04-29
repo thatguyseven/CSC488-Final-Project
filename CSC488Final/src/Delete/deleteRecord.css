@@ -1,0 +1,92 @@
+/* styles.css */
+
+/* Container and layout */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Input and buttons */
+  input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Check NAICS Code Button */
+  .check-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .check-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Delete Button */
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  /* Table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Message styles */
+  .no-data {
+    color: #dc3545;
+    margin-top: 16px;
+  }
+  
+  .matched-records {
+    margin-top: 24px;
+  }
+  
+  .matched-records h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  
+  .matched-records table {
+    width: 100%;
+    margin-top: 16px;
+  }
+  

@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import redis
 import json
 import uuid
 
 app = Flask(__name__)
+CORS(app)
 
 # Connect to Redis
 r = redis.Redis(host='localhost', port=6379, decode_responses=True)
@@ -28,7 +30,6 @@ def create_aggregate():
     r.hset(AGGREGATE_KEY, code, json.dumps(data))
     return jsonify({"message": f"Aggregate entry for code {code} created."}), 201
 
-
 @app.route('/create-gas', methods=['POST'])
 def create_gas():
     data = request.get_json()
@@ -39,6 +40,44 @@ def create_gas():
 
     r.hset(GAS_KEY, gas_name, json.dumps(data))
     return jsonify({"message": f"Gas entry for {gas_name} created."}), 201
+
+@app.route('/get-aggregate', methods=['GET'])
+def get_aggregate():
+    # Fetch all aggregate emissions data from Redis
+    aggregate_data = r.hgetall(AGGREGATE_KEY)
+    return jsonify(aggregate_data)
+
+
+@app.route('/get-gas', methods=['GET'])
+def get_gas():
+    # Fetch all gas emissions data from Redis
+    gas_data = r.hgetall(GAS_KEY)
+    
+    # Check if the data is being retrieved correctly
+    if not gas_data:
+        return jsonify({"error": "No gas data found."}), 404  # Handle case where no data exists
+
+    return jsonify(gas_data)  # Return the fetched gas data
+
+@app.route('/delete-aggregate/<naics_code>', methods=['DELETE'])
+def delete_aggregate(naics_code):
+    if r.hexists(AGGREGATE_KEY, naics_code):
+        r.hdel(AGGREGATE_KEY, naics_code)
+        return jsonify({"message": f"Aggregate record for {naics_code} deleted."}), 200
+    return jsonify({"error": "Aggregate record not found."}), 404
+
+@app.route('/delete-gas/<naics_code>', methods=['DELETE'])
+def delete_gas(naics_code):
+    deleted = False
+    all_gas = r.hgetall(GAS_KEY)
+    for key, value in all_gas.items():
+        record = json.loads(value)
+        if str(record.get("2017 NAICS Code")) == naics_code:
+            r.hdel(GAS_KEY, key)
+            deleted = True
+    if deleted:
+        return jsonify({"message": f"Gas records for NAICS code {naics_code} deleted."}), 200
+    return jsonify({"error": "No gas records found for NAICS code."}), 404
 
 # ----------------------
 # Graph Endpoints
