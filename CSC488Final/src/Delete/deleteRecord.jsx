@@ -32,8 +32,8 @@ function DeleteRecord() {
       if (allMatches.length > 0) {
         setMatchedRecords(allMatches);
         // Set the NAICS Title from matched records (if exists)
-        const titleFromAgg = matchedAgg.length > 0 ? matchedAgg[0]['NAICS Title'] : '';
-        const titleFromGas = matchedGas.length > 0 ? matchedGas[0]['NAICS Title'] : '';
+        const titleFromAgg = matchedAgg.length > 0 ? matchedAgg[0]['2017_NAICS_Title'] : '';
+        const titleFromGas = matchedGas.length > 0 ? matchedGas[0]['2017_NAICS_Title'] : '';
 
         setNaicsTitle(titleFromAgg || titleFromGas); // Prefer Aggregate title if both are available
       } else {
@@ -74,7 +74,7 @@ function DeleteRecord() {
 
   return (
     <div className="container">
-      <h1 className="text-2xl font-semibold mb-4">Check NAICS Code</h1>
+      <h1 className="text-2xl font-semibold mb-4">Delete a Record</h1>
 
       <input
         type="text"
