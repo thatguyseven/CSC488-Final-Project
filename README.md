@@ -22,6 +22,25 @@ The cluster should be up and running. Run `kubectl get services` to confirm that
 
 ## Using the API
 Follow these instructions below to run the API:
-1. Navigate to the browser.
-2. Judas gain gold ssu:
-3. The Ki
+1. In your terminal, run `kubectl get services` to find the external IP address of your project.
+2. Navigate to the browser.
+3. Enter the corresponding IP and port number in the format `http://<ip address>:<port number>/<endpoint>`
+
+Below are the endpoints the API provides:
+| Endpoint | Description |
+| - | - |
+| /graph-industry | Gets aggregate emission factor data of specific industry/industries. Has optional data option that allows the specification of certain industries. |
+| /graph-gas  | Gets individual emission factors of specific industry/industries |
+| /create-aggregate | Creates an aggregate data point | 
+| /create-gas | Creates a gas data point |
+| /list-gas | Get a list of all unique GHG names available for querying |
+| /delete-<code> | Delete based on NAICS code |
+| /update | Update based on element based on NAICS code |
+
+
+
+
+
+
+
+
