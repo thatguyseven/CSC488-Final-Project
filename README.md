@@ -6,7 +6,7 @@ This API is for the envrionmentally conscious individuals and researchers lookin
 This API is still currently under development.
 
 ## Dataset Used
-This API uses the **Supply Chain Greenhouse Gas Emission Factors v1.2 by NAICS-6** for the emission data. 
+This API uses the [**Supply Chain Greenhouse Gas Emission Factors v1.2 by NAICS-6**](https://catalog.data.gov/dataset/supply-chain-greenhouse-gas-emission-factors-v1-2-by-naics-6) for the emission data. 
 
 ## Deploying the API
 Requirements: 
